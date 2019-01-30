@@ -1,0 +1,21 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+#mytable {
+  height: 540px;
+}
+
+.myLink{
+  text-decoration: none;
+}
+
+.myLink:focus{
+  text-decoration: none;
+}
+
+.myLink:hover{
+  text-decoration: none;
+}

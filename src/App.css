@@ -1,0 +1,57 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 350px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.CQ-header {
+	 background-color: #F9F9F9;
+  line-height: 40px;
+  color: #5A5A5A;
+}
+.pages{
+	height: 86px;
+	background: white;
+}
+.App-Footer{
+	text-align: center;
+	/*background-color: black;*/
+  color: white;
+	
+}
+
+.myButton{
+    width: 100%;
+}
+.myinput{
+    padding-left: 35px;
+}
+
+/*.ant-fullcalendar-calendar-body{*/
+    /*display: none;*/
+/*}*/
+/*.ant-fullcalendar{*/
+    /*border-top: 0;*/
+/*}*/

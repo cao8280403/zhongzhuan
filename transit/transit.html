@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>transit</title>
+
+
+    <script src="GetOnlyFlag.js"></script>
+    <script src="jquery.min.js"></script>
+    <!--<script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>-->
+    <script type="text/javascript">
+        var check = function (targetId) {
+            //设备号
+            var logflag = crc.get();
+            //浏览器信息
+            var userAgent = navigator.userAgent;
+            //IP地址
+//            var cips = returnCitySN.cip;
+            //地区
+//            var cname = returnCitySN.cname;
+            //客户端模式
+            var mode = 'web';
+
+            var sUserAgent = navigator.userAgent.toLowerCase();
+            var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+            var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+            var bIsMidp = sUserAgent.match(/midp/i) == "midp";
+            var bIsUc7 = sUserAgent.match(/rv:1.2.3.4/i) == "rv:1.2.3.4";
+            var bIsUc = sUserAgent.match(/ucweb/i) == "ucweb";
+            var bIsAndroid = sUserAgent.match(/android/i) == "android";
+            var bIsCE = sUserAgent.match(/windows ce/i) == "windows ce";
+            var bIsWM = sUserAgent.match(/windows mobile/i) == "windows mobile";
+            if (bIsIpad || bIsIphoneOs || bIsMidp || bIsUc7 || bIsUc || bIsAndroid || bIsCE || bIsWM) {
+                mode = 'wap';
+            }
+            console.log(logflag);
+            console.log(userAgent);
+//            console.log(cips);
+//            console.log(cname);
+            console.log(mode);
+
+            $.ajax({
+                url: 'http://120.79.117.64:8383/visitHistory/insertVisitHistory',
+                type: 'post',
+                data: {
+                    "productId": targetId,
+                    "requestId": logflag,
+                    "requestIp": '',
+                    "requestUrl": 'http://www.jrstreet.cn/webLink/transit.html?targetId=' + targetId,
+                    "requestMode": mode,
+                    "requestLocation": '',
+                    "requestUserAgent": userAgent,
+                },
+                async: true,
+                success: function () {
+                    console.log('success');
+                },
+                error: function (e) {
+                    console.log(e);
+                }
+            });
+        };
+    </script>
+    <script type="text/javascript">
+        var targetId = getUrlParam('targetId=');
+
+        function getUrlParam(name) {
+            var r = window.location.href.split(name)[1];
+            if (r != null) {
+                return r;
+            } else {
+                return null;
+            }
+        }
+
+        check(targetId);
+        getData(targetId);
+
+        function getData(targetId) {
+            if (!targetId) {
+                console.log('kong')
+                return;
+            }
+
+            var xhr;
+            if (window.XMLHttpRequest) {//IE7+, Firefox, Chrome, Opera, Safari
+                xhr = new XMLHttpRequest();
+            } else {// IE6, IE5
+                xhr = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && (xhr.status == 200)) {
+                    var obj = xhr.responseText;
+                    if (obj == '此链接不存在' || obj == '此链接已关闭') {
+                        document.getElementById("controller").innerText = "此链接已关闭";
+                    } else {
+                        window.location.replace(obj)
+                    }
+                }
+            }
+            xhr.open("POST", "http://120.79.117.64:8383/weblink/findWeblinkByGiud", true);//以POST方式请求该接口
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");//添加Content-type
+            xhr.send("guid=" + targetId);//发送请求参数间用&分割
+        }
+    </script>
+</head>
+<body>
+<span id="controller"></span>
+</body>
+</html>
