@@ -323,7 +323,7 @@ class AdverList extends React.Component {
                 }
             },
             error: function (res) {
-                message.warning(JSON.parse(res).message);
+                message.warning('error');
             }
         })
     }
@@ -361,7 +361,7 @@ class AdverList extends React.Component {
                 }
             },
             error: function (res) {
-                message.warning(JSON.parse(res).message);
+                message.warning('error');
             }
         })
     }
@@ -399,7 +399,7 @@ class AdverList extends React.Component {
                 }
             },
             error: function (res) {
-                message.warning(JSON.parse(res).message);
+                message.warning('error');
             }
         })
     }
