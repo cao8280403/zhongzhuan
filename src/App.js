@@ -38,7 +38,9 @@ function asyncComponent(importComponent) {
 
 const login=asyncComponent(()=>import('./webLink/login'));
 const AdverList=asyncComponent(()=>import('./webLink/adverList'));
+const Editor=asyncComponent(()=>import('./webLink/editor'));
 const Inbox=asyncComponent(()=>import('./webLink/inbox'));
+const Map=asyncComponent(()=>import('./webLink/map'));
 const About=asyncComponent(()=>import('./webLink/about'));
 const Liuliang=asyncComponent(()=>import('./webLink/liuliang'));
 const Zhuye=asyncComponent(()=>import('./webLink/zhuye'));
@@ -52,6 +54,8 @@ class App extends React.Component {
                     <Zhuye>
                         <Route exact path="/sub1/key1" component={AdverList} />
                         <Route exact path="/sub1/key1/liuliang" component={Liuliang} />
+                        <Route exact path="/sub1/key2" component={Map} />
+                        <Route exact path="/sub1/key3" component={Editor} />
                         <Route path="/key4" component={About} />
                         <Route path="/key5" component={Inbox} />
                     </Zhuye>

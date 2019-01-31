@@ -55,11 +55,11 @@ class Daohang extends React.Component {
     render() {
         const key1 = '/key1';
         const sub1 = `/sub1`;
-        const key2 = '/key2'
-        const key3 = '/key3'
-        const key4 = '/key4'
-        const key5 = '/key5'
-        const key6 = '/key6'
+        const key2 = '/key2';
+        const key3 = '/key3';
+        const key4 = '/key4';
+        const key5 = '/key5';
+        const key6 = '/key6';
         // const pathName = hashHistory.getCurrentLocation().pathname;
         return (
             <div style={{ height: 980,backgroundColor:'#223344'}}>
@@ -77,7 +77,7 @@ class Daohang extends React.Component {
 
                     <SubMenu key={sub1} title={<span><Icon type="pie-chart" /><span>网络链接管理</span></span>}>
                         <Menu.Item key={key1}>概览</Menu.Item>
-                        <Menu.Item key={key2}>图表</Menu.Item>
+                        <Menu.Item key={key2}>地图</Menu.Item>
                         <Menu.Item key={key3}>编辑器</Menu.Item>
                     </SubMenu>
                     <Menu.Item key={key4}>
