@@ -22,7 +22,7 @@ import path from "./../db_config.json"
 const $ = require("myjquery");
 const Option = Select.Option;
 let msg = '';
-var myChart;
+
 class Liuliang extends React.Component {
     constructor(props) {
         super(props);
@@ -44,7 +44,7 @@ class Liuliang extends React.Component {
 
     getdata = (msg) => {
         var _this = this;
-        // console.log(msg);
+        console.log(msg);
         let pv = [];
         let uv = [];
         let date = [];
@@ -89,10 +89,10 @@ class Liuliang extends React.Component {
     }
 
     echartInit = () => {
-        // console.log(this.state.xdata.length);
+        console.log("didmount");
         if (this.state.xdata.length > 0) {
             // 基于准备好的dom，初始化echarts实例
-            myChart = echarts.init(document.getElementById('main'));
+            var myChart = echarts.init(document.getElementById('main'));
             // window.onresize = myChart.resize;
             // 绘制图表
             myChart.setOption({
@@ -162,8 +162,6 @@ class Liuliang extends React.Component {
                 ]
             });
         } else {
-            //释放div绑定的echart对象
-            myChart.dispose();
             document.getElementById('main').innerHTML='<div style=text-align:center>NO DATA</div>';
         }
     };

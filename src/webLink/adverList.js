@@ -1,10 +1,10 @@
 import React from 'react';
-import {Table,DatePicker, Switch, Input,  Popconfirm,  message, Button,  Pagination, Modal} from 'antd';
+import {Table, Switch, Input,  Popconfirm,  message, Button,  Pagination, Modal} from 'antd';
 import path from "./../db_config.json"
 import './../App.css'
 import {Link} from "react-router-dom";
 import copyplugin from 'copy-to-clipboard'
-const {  RangePicker } = DatePicker;
+
 const Search = Input.Search;
 const $ = require("myjquery");
 const data = [];
@@ -26,9 +26,7 @@ class AdverList extends React.Component {
             visible: false,
             modalinput1: '',
             modalinput2: '',
-            modaltitle: '',
-            pv:'',
-            uv:''
+            modaltitle: ''
         };
         this.columns = [
             // {
@@ -53,12 +51,6 @@ class AdverList extends React.Component {
                 title: '链接',
                 dataIndex: 'sourceWebLink',
                 width: '30%',
-                align: 'center',
-                editable: true,
-            }, {
-                title: '最近访问时间',
-                dataIndex: 'visitTime',
-                width: '10%',
                 align: 'center',
                 editable: true,
             }, {
@@ -270,24 +262,6 @@ class AdverList extends React.Component {
         })
     };
 
-    timestampToTime =(timestamp) =>{
-        //判断是否为空
-        // console.log(timestamp);
-        if(timestamp!=null) {
-            let date = new Date(timestamp);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
-            let Y = date.getFullYear() + '-';
-            let M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
-            let D = date.getDate() + ' ';
-            let h = date.getHours() + ':';
-            let m = date.getMinutes() + ':';
-            let s = date.getSeconds();
-            return Y + M + D + h + m + s;
-        }
-        else {
-            return '-';
-        }
-    }
-
 
     //按条件查询
     renderData(value) {
@@ -308,13 +282,12 @@ class AdverList extends React.Component {
                     let tol = res.count;
                     for (let i = 0; i < res.data.length; i++) {
                         data2.push({
-                            key: res.data[i][0],
-                            id: res.data[i][0],
-                            productName: res.data[i][5],
-                            sourceWebLink: res.data[i][3],
-                            state: res.data[i][6],
-                            visitTime: _this.timestampToTime(res.data[i][9]),
-                            newLink: 'http://www.jrstreet.cn/webLink/transit.html?targetId=' + res.data[i][0],
+                            key: res.data[i].guid,
+                            id: res.data[i].guid,
+                            productName: res.data[i].productName,
+                            sourceWebLink: res.data[i].sourceWebLink,
+                            state: res.data[i].state,
+                            newLink: 'http://www.jrstreet.cn/webLink/transit.html?targetId=' + res.data[i].guid,
                         });
                     }
                     _this.setState({data: data2, toltalrecord: tol});
@@ -323,7 +296,7 @@ class AdverList extends React.Component {
                 }
             },
             error: function (res) {
-                message.warning('error');
+                message.warning(JSON.parse(res).message);
             }
         })
     }
@@ -346,13 +319,12 @@ class AdverList extends React.Component {
                     let tol = res.count;
                     for (let i = 0; i < res.data.length; i++) {
                         data2.push({
-                            key: res.data[i][0],
-                            id: res.data[i][0],
-                            productName: res.data[i][5],
-                            sourceWebLink: res.data[i][3],
-                            state: res.data[i][6],
-                            visitTime: _this.timestampToTime(res.data[i][9]),
-                            newLink: 'http://www.jrstreet.cn/webLink/transit.html?targetId=' + res.data[i][0],
+                            key: res.data[i].guid,
+                            id: res.data[i].guid,
+                            productName: res.data[i].productName,
+                            sourceWebLink: res.data[i].sourceWebLink,
+                            state: res.data[i].state,
+                            newLink: 'http://www.jrstreet.cn/webLink/transit.html?targetId=' + res.data[i].guid,
                         });
                     }
                     _this.setState({data: data2, toltalrecord: tol});
@@ -361,7 +333,7 @@ class AdverList extends React.Component {
                 }
             },
             error: function (res) {
-                message.warning('error');
+                message.warning(JSON.parse(res).message);
             }
         })
     }
@@ -384,13 +356,12 @@ class AdverList extends React.Component {
                     let tol = res.count;
                     for (let i = 0; i < res.data.length; i++) {
                         data2.push({
-                            key: res.data[i][0],
-                            id: res.data[i][0],
-                            productName: res.data[i][5],
-                            sourceWebLink: res.data[i][3],
-                            state: res.data[i][6],
-                            visitTime: _this.timestampToTime(res.data[i][9]),
-                            newLink: 'http://www.jrstreet.cn/webLink/transit.html?targetId=' + res.data[i][0],
+                            key: res.data[i].guid,
+                            id: res.data[i].guid,
+                            productName: res.data[i].productName,
+                            sourceWebLink: res.data[i].sourceWebLink,
+                            state: res.data[i].state,
+                            newLink: 'http://www.jrstreet.cn/webLink/transit.html?targetId=' + res.data[i].guid,
                         });
                     }
                     _this.setState({data: data2, currentPage: page, toltalrecord: tol});
@@ -399,7 +370,7 @@ class AdverList extends React.Component {
                 }
             },
             error: function (res) {
-                message.warning('error');
+                message.warning(JSON.parse(res).message);
             }
         })
     }
@@ -411,31 +382,6 @@ class AdverList extends React.Component {
     clearSearch = () => {
         this.renderData2('');
     };
-
-    datePickerChange =(date, dateString)=> {
-        var _this = this;
-        $.ajax({
-            type: 'post',
-            async: false,
-            data: {
-                'begin': dateString[0],
-                'end': dateString[1],
-            },
-            url: path.path5 + '/weblink/findPVUV',
-            success: function (res) {
-                if (res.msg=='success'){
-                   _this.setState({pv:res.data[0][0],uv: res.data[0][1]}) ;
-                }
-            },
-            error: function (e) {
-                message.warning('error');
-            }
-        });
-
-
-
-    };
-
 
     render() {
         return (
@@ -451,9 +397,6 @@ class AdverList extends React.Component {
                     <Button ghost={false} onClick={this.clearSearch} type="primary"
                             style={{marginLeft: 40}}>显示全部</Button>
                     <Button ghost={false} onClick={this.xinzeng} type="primary" style={{marginLeft: 40}}>新增</Button>
-                    <RangePicker onChange={this.datePickerChange} placeholder={['开始时间','结束时间']} style={{marginLeft: 40}}/>
-                    <span style={{marginLeft: 40}}>PV：</span>{this.state.pv}
-                    <span style={{marginLeft: 40}}>UV：</span>{this.state.uv}
                 </div>
                 <Modal
                     bodyStyle={{width: 500, height: 250}}

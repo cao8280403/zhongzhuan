@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>transit</title>
+    <title>transite</title>
 
 
     <script src="GetOnlyFlag.js"></script>
@@ -76,35 +76,38 @@
         check(targetId);
         getData(targetId);
 
+        var xhr ;
         function getData(targetId) {
             if (!targetId) {
                 console.log('kong')
                 return;
             }
 
-            var xhr;
-            if (window.XMLHttpRequest) {//IE7+, Firefox, Chrome, Opera, Safari
-                xhr = new XMLHttpRequest();
-            } else {// IE6, IE5
-                xhr = new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4 && (xhr.status == 200)) {
-                    var obj = xhr.responseText;
+            $.ajax({
+                url: 'http://120.79.117.64:8383/weblink/findWeblinkByGiud',
+                type: 'post',
+                data: {
+                    "guid": targetId
+                },
+                async: true,
+                success: function (obj) {
                     if (obj == '此链接不存在' || obj == '此链接已关闭') {
                         document.getElementById("controller").innerText = "此链接已关闭";
                     } else {
-                        window.location.replace(obj)
+                        document.getElementById("controller").innerHTML = '<a href="'+obj+ '">'+obj+'</a>';
+
+                        //window.location.replace(obj)
                     }
+                },
+                error: function (e) {
+                    console.log(e);
                 }
-            }
-            xhr.open("POST", "http://120.79.117.64:8383/weblink/findWeblinkByGiud", true);//以POST方式请求该接口
-            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");//添加Content-type
-            xhr.send("guid=" + targetId);//发送请求参数间用&分割
+            });
         }
     </script>
 </head>
-<body>
-<span id="controller"></span>
+<body style="text-align: center;margin-top: 10%">
+<div style="color: #2f54eb;font-size: 20px">点击下方链接进行跳转</div>
+<div id="controller" style="margin-top: 10px"></div>
 </body>
 </html>
