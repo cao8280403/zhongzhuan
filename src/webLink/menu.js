@@ -1,6 +1,7 @@
 import { Menu, Icon } from 'antd';
 import React from 'react';
-
+import {Link} from 'react-router-dom';
+import './../App.css';
 
 const SubMenu = Menu.SubMenu;
 
@@ -35,18 +36,18 @@ class Daohang extends React.Component {
     };
 
     // 菜单点击事件
-    onclickmenu = (item) => {
-        let newpath = '';
-        //遍历keypath，获取需要跳转的路由
-        for (let i=item.keyPath.length-1;i>=0;i--){
-            newpath += item.keyPath[i];
-        }
-        //如果是同一路由，则不操作
-        if(newpath!=this.state.pathurl) {
-            window.location.href = newpath;
-            // this.props.history.push(newpath);
-        }
-    };
+    // onclickmenu = (item) => {
+    //     let newpath = '';
+    //     //遍历keypath，获取需要跳转的路由
+    //     for (let i=item.keyPath.length-1;i>=0;i--){
+    //         newpath += item.keyPath[i];
+    //     }
+    //     //如果是同一路由，则不操作
+    //     if(newpath!=this.state.pathurl) {
+    //         window.location.href = newpath;
+    //         // this.props.history.push(newpath);
+    //     }
+    // };
 
     componentDidMount(){
 
@@ -55,11 +56,11 @@ class Daohang extends React.Component {
     render() {
         const key1 = '/key1';
         const sub1 = `/sub1`;
-        const key2 = '/key2'
-        const key3 = '/key3'
-        const key4 = '/key4'
-        const key5 = '/key5'
-        const key6 = '/key6'
+        const key2 = '/key2';
+        const key3 = '/key3';
+        const key4 = '/key4';
+        const key5 = '/key5';
+        const key6 = '/key6';
         // const pathName = hashHistory.getCurrentLocation().pathname;
         return (
             <div style={{ height: 980,backgroundColor:'#223344'}}>
@@ -71,27 +72,29 @@ class Daohang extends React.Component {
                     defaultOpenKeys={[this.state.sub]}
                     mode="inline"
                     theme="dark"
-                    onClick={this.onclickmenu}
+                    // onClick={this.onclickmenu}
                     inlineCollapsed={this.state.collapsed}
                 >
 
                     <SubMenu key={sub1} title={<span><Icon type="pie-chart" /><span>网络链接管理</span></span>}>
-                        <Menu.Item key={key1}>概览</Menu.Item>
-                        <Menu.Item key={key2}>图表</Menu.Item>
-                        <Menu.Item key={key3}>编辑器</Menu.Item>
+                        <Menu.Item key={key1}> <Link to={sub1+key1} className={"myLink"}>概览</Link></Menu.Item>
+                        <Menu.Item key={key2}> <Link to={sub1+key2} className={"myLink"}>地图</Link></Menu.Item>
+                        <Menu.Item key={key3}> <Link to={sub1+key3} className={"myLink"}>编辑器</Link></Menu.Item>
                     </SubMenu>
                     <Menu.Item key={key4}>
+                        <Link to={key4} className={"myLink"}>
                         <Icon type="desktop" />
-                        <span>文件管理</span>
+                            <span>文件管理</span></Link>
                     </Menu.Item>
                     <Menu.Item key={key5}>
-
+                        <Link to={key5}className={"myLink"}>
                         <Icon type="inbox" />
-                        <span>我的信息</span>
+                            <span>我的信息</span></Link>
                     </Menu.Item>
                     <Menu.Item key={key6}>
+                        <Link to={key6}className={"myLink"}>
                         <Icon type="setting" />
-                        <span>系统设置</span>
+                            <span>系统设置</span></Link>
                     </Menu.Item>
                 </Menu>
             </div>
