@@ -1,10 +1,10 @@
 import React from 'react';
 import {Table, DatePicker, Col, Input, Pagination, Button, Row, message, Form} from 'antd';
 import path from "./../db_config.json"
+import $ from 'jquery';
 // import ExportJsonExcel from 'js-export-excel'
 const Search = Input.Search;
 const data = [];
-const $ = require("myjquery");
 
 class Chachong extends React.Component {
     constructor(props) {

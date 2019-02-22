@@ -1,12 +1,12 @@
 import React from 'react';
 import {Table,DatePicker, Switch, Input,  Popconfirm,  message, Button,  Pagination, Modal} from 'antd';
+import $ from 'jquery';
 import path from "./../db_config.json"
 import './../App.css'
 import {Link} from "react-router-dom";
 import copyplugin from 'copy-to-clipboard'
 const {  RangePicker } = DatePicker;
 const Search = Input.Search;
-const $ = require("myjquery");
 const data = [];
 var searchValue = '';
 var editguid = '';

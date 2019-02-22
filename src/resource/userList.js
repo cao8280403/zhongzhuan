@@ -2,7 +2,7 @@ import React from 'react';
 import {Table, Input, InputNumber, Popconfirm, Form, message, Button, Col, Row,Pagination,Icon} from 'antd';
 import path from "./../db_config.json"
 import uuid from "node-uuid"
-
+import $ from 'jquery';
 let prodPragramId='';
 const productList = [];
 let productId = 0;
@@ -10,7 +10,6 @@ let excelName = '';
 const sheetType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
 const sheetType2 = 'application/vnd.ms-excel';
 const Search = Input.Search;
-const $ = require("myjquery");
 const data = [];
 // for (let i = 0; i < 100; i++) {
 //     data.push({

@@ -1,5 +1,6 @@
 import React from 'react';
 import {message, Select, Icon,Button} from 'antd';
+import $ from 'jquery';
 // import {Calendar,LocaleProvider} from 'antd';
 // import zh_CN from 'antd/lib/locale-provider/zh_CN';
 // import moment from 'moment';
@@ -19,7 +20,6 @@ import 'echarts/lib/component/markLine';
 
 import path from "./../db_config.json"
 
-const $ = require("myjquery");
 const Option = Select.Option;
 let msg = '';
 var myChart;

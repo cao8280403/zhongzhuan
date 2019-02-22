@@ -4,9 +4,8 @@ import path from "./../db_config.json"
 import uuid from "node-uuid"
 import {Link} from "react-router-dom";
 import {copy} from 'copy-to-clipboard';
-
+import $ from 'jquery';
 const Search = Input.Search;
-const $ = require("myjquery");
 const data = [];
 // for (let i = 0; i < 100; i++) {
 //     data.push({

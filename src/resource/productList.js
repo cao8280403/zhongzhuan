@@ -3,7 +3,7 @@ import {Table, Pagination,Input, InputNumber, Popconfirm, Form, message, Button,
 import path from "./../db_config.json"
 import uuid from "node-uuid"
 import {Link} from "react-router-dom";
-
+import $ from 'jquery';
 let adverId='';
 const productList = [];
 let productId = 0;
@@ -11,7 +11,6 @@ let excelName = '';
 const sheetType = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
 const sheetType2 = 'application/vnd.ms-excel';
 const Search = Input.Search;
-const $ = require("myjquery");
 const data = [];
 // for (let i = 0; i < 100; i++) {
 //     data.push({

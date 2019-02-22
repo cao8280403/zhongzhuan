@@ -6,8 +6,7 @@ import path from "./../db_config.json"
 import './css/dfault.css'
 import request from 'superagent';
 import reqwest from 'reqwest';
-
-const $ = require("myjquery");
+import $ from 'jquery';
 const productList = [];
 let productId = 0;
 let excelName = '';
