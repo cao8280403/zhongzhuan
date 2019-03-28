@@ -9,14 +9,14 @@
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <!--<script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>-->
+    <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
     <script type="text/javascript">
         var check = function (targetId) {
             //设备号
             var logflag = crc.get();
             //浏览器信息
             var userAgent = navigator.userAgent;
-            //IP地址
+//            //IP地址
 //            var cips = returnCitySN.cip;
             //地区
 //            var cname = returnCitySN.cname;
@@ -42,7 +42,7 @@
             console.log(mode);
 
             $.ajax({
-                url: 'http://120.79.117.64:8383/visitHistory/insertVisitHistory',
+                url: 'http://120.24.67.105:8383/visitHistory/insertVisitHistory',
                 type: 'post',
                 data: {
                     "productId": targetId,
@@ -88,7 +88,7 @@
             }
 
             $.ajax({
-                url: 'http://120.79.117.64:8383/weblink/findWeblinkByGiud',
+                url: 'http://120.24.67.105:8383/weblink/findWeblinkByGiud',
                 type: 'post',
                 data: {
                     "guid": targetId
@@ -114,7 +114,9 @@
         }
 
         var submitform = function () {
-            console.log(productlink);
+            //IP地址
+            var cips = returnCitySN.cip;
+            console.log(cips);
             //验证表单
             var name = document.getElementById("firstname").value;
             var telephone = document.getElementById("lastname").value;
@@ -126,17 +128,23 @@
                 alert("手机号码有误，请重填");
             } else {
                 $.ajax({
-                    url: 'http://120.79.117.64:8383/registerHistory/insert',
+                    url: 'http://120.24.67.105:8383/registerHistory/insert',
                     type: 'post',
                     data: {
                         "productId": targetId,
                         "name": name,
-                        "telephone": telephone
+                        "telephone": telephone,
+                        "ip": cips
                     },
                     async: true,
                     success: function (obj) {
-                        console.log('success');
-                        window.location.replace(productlink);
+                        console.log(obj);
+                        if(obj=='yes') {
+                            window.location.replace(productlink);
+                        }
+                        else {
+                            alert("您已申请过，无法重复申请");
+                        }
                     },
                     error: function (e) {
                         console.log(e);
