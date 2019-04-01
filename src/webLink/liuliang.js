@@ -90,9 +90,10 @@ class Liuliang extends React.Component {
 
     echartInit = () => {
         // console.log(this.state.xdata.length);
+        myChart = echarts.init(document.getElementById('main'));
         if (this.state.xdata.length > 0) {
             // 基于准备好的dom，初始化echarts实例
-            myChart = echarts.init(document.getElementById('main'));
+            // myChart = echarts.init(document.getElementById('main'));
             // window.onresize = myChart.resize;
             // 绘制图表
             myChart.setOption({
