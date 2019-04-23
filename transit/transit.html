@@ -118,11 +118,9 @@
             var cips = returnCitySN.cip;
             console.log(cips);
             //验证表单
-            var name = document.getElementById("firstname").value;
+//            var name = document.getElementById("firstname").value;
             var telephone = document.getElementById("lastname").value;
-            if (name == '' || name == undefined) {
-                alert('请输入正确的姓名')
-            } else if (telephone == '' || telephone == undefined) {
+            if (telephone == '' || telephone == undefined) {
                 alert('请输入正确的电话')
             } else if (!(/^1(3|4|5|7|8)\d{9}$/.test(telephone))) {
                 alert("手机号码有误，请重填");
@@ -132,7 +130,7 @@
                     type: 'post',
                     data: {
                         "productId": targetId,
-                        "name": name,
+                        "name": '',
                         "telephone": telephone,
                         "ip": cips
                     },
@@ -155,32 +153,33 @@
         }
     </script>
 </head>
-<body style="text-align: center;font-size: 33px">
-<div id="content" class="container" style="margin-top: 300px;">
-    <div class="row">
-        <div class="col-xs-2 col-sm-2"></div>
-        <div class="col-xs-2 col-sm-2">姓名</div>
-        <div class="col-xs-6 col-sm-6">
-            <input type="text" id="firstname"
-                   placeholder="请输入姓名">
+<body style="text-align: center;font-size: 50px">
+<div  style="margin-top: 300px;font-size: 30px;color: #ff7277">该提交仅用于登记，非有效注册，提交后请继续完善后续注册和申请</div>
+<div id="content" class="" style="margin-top: 45px;">
+    <!--<div class="row">-->
+        <!--<div class="col-xs-2 col-sm-2"></div>-->
+        <!--<div class="col-xs-2 col-sm-2">姓名</div>-->
+        <!--<div class="col-xs-6 col-sm-6">-->
+            <!--<input type="text" id="firstname"-->
+                   <!--placeholder="请输入姓名">-->
 
-        </div>
+        <!--</div>-->
+        <!--<div class="col-xs-2 col-sm-2"></div>-->
+    <!--</div>-->
+    <div class="row" style="margin-top: 45px">
         <div class="col-xs-2 col-sm-2"></div>
-    </div>
-    <div class="row" style="margin-top: 15px">
-        <div class="col-xs-2 col-sm-2"></div>
-        <div class="col-xs-2 col-sm-2">手机</div>
-        <div class="col-xs-6 col-sm-6">
-            <input type="text" id="lastname"
+        <!--<div class="col-xs-2 col-sm-2">手机</div>-->
+        <div class="col-xs-8 col-sm-8">
+            <input type="text" id="lastname" style="border:0.5px solid #000"
                    placeholder="请输入手机号码">
 
         </div>
 
     </div>
-    <div class="row" style="margin-top: 15px">
+    <div class="row" style="margin-top: 45px">
         <div class="col-xs-2 col-sm-2"></div>
         <div class="col-xs-8 col-sm-8">
-            <button class="btn btn-default btn-lg" onclick="submitform()">确定</button>
+            <button class="btn btn-default btn-lg" style="font-size: 55px;border:0.5px solid #000" onclick="submitform()">提交登记</button>
         </div>
         <div class="col-xs-2 col-sm-2"></div>
 
