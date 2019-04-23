@@ -1,5 +1,5 @@
 import React from 'react';
-import {message, Select, Icon,Button} from 'antd';
+import {message, Select, Icon, Button} from 'antd';
 import $ from 'jquery';
 // import {Calendar,LocaleProvider} from 'antd';
 // import zh_CN from 'antd/lib/locale-provider/zh_CN';
@@ -23,6 +23,7 @@ import path from "./../db_config.json"
 const Option = Select.Option;
 let msg = '';
 var myChart;
+
 class Liuliang extends React.Component {
     constructor(props) {
         super(props);
@@ -165,7 +166,7 @@ class Liuliang extends React.Component {
         } else {
             //释放div绑定的echart对象
             myChart.dispose();
-            document.getElementById('main').innerHTML='<div style=text-align:center>NO DATA</div>';
+            document.getElementById('main').innerHTML = '<div style=text-align:center>NO DATA</div>';
         }
     };
     // onPanelChange = (value, mode)=> {
@@ -183,14 +184,23 @@ class Liuliang extends React.Component {
         window.history.go(-1);
     };
 
+    //导出表格
+    downloadExcel = () => {
+        console.log(this.state.year);
+        console.log(this.state.month);
+        console.log(msg);
+        window.location.href=path.path5 + "/registerHistory/daochu?guid="+msg+"&year="+this.state.year+"&month="+this.state.month;
+    };
+
+
     render() {
         return (
             <div>
                 <div style={{marginBottom: 16, marginTop: 20, marginLeft: 40}}>
                     <Button type="primary" ghost={true} onClick={this.goback}>
-                        <Icon type="left" />返回
+                        <Icon type="left"/>返回
                     </Button>
-                    <span style={{color: '#000', fontWeight: '500', fontSize: 18,marginLeft: 30}}>请选择年月</span>
+                    <span style={{color: '#000', fontWeight: '500', fontSize: 18, marginLeft: 30}}>请选择年月</span>
                     <Select defaultValue={this.state.year} style={{width: 100, marginLeft: 10}}
                             onChange={this.handleChange}>
                         <Option value="2019">2019年</Option>
@@ -221,9 +231,9 @@ class Liuliang extends React.Component {
                         <Option value="11">11月</Option>
                         <Option value="12">12月</Option>
                     </Select>
-
+                    <Button style={{marginLeft: 10}} onClick={this.downloadExcel}> 导出登记表格 </Button>
                 </div>
-                <div id="main" style={{width: '100%', height: 600,padding:20}}>
+                <div id="main" style={{width: '100%', height: 600, padding: 20}}>
                 </div>
             </div>
         )
