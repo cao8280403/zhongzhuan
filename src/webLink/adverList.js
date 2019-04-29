@@ -82,12 +82,12 @@ class AdverList extends React.Component {
                 render: (text, record) => {
                     if (record.state == 1) {
                         return (
-                            <Switch defaultChecked={true} onClick={() => this.switchclick(record.key)}/>
+                            <Switch defaultChecked={true} onClick={() => this.switchclick(record.key,record.state)}/>
                         )
                     }
                     if (record.state == 0) {
                         return (
-                            <Switch defaultChecked={false} onClick={() => this.switchclick(record.key)}/>
+                            <Switch defaultChecked={false} onClick={() => this.switchclick(record.key,record.state)}/>
                         )
                     }
                 }
@@ -152,11 +152,11 @@ class AdverList extends React.Component {
         message.success("复制中转链接成功");
     };
 
-    switchclick = (key) => {
+    switchclick = (key,value) => {
         var _this = this;
         $.ajax({
             type: 'post',
-            async: false,
+            async: true,
             data: {
                 'guid': key,
             },
@@ -164,7 +164,7 @@ class AdverList extends React.Component {
             success: function (res) {
                 message.success(res);
                 // /调用接口刷新数据
-                _this.renderData2(searchValue);
+                // _this.renderData2(searchValue);
             },
             error: function (res) {
                 message.warning(res);
